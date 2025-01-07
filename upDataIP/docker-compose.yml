@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  cloud-server:
+    build: 
+      context: ./cloud-server
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+      - "3000:3000"
+    environment:
+      - DOMAIN=${DOMAIN}
+      - TARGET_PORT=${TARGET_PORT}
+    volumes:
+      - nginx_conf:/etc/nginx/conf.d
+    restart: always
+
+  dynamic-server:
+    build: 
+      context: ./dynamic-server
+      dockerfile: Dockerfile
+    environment:
+      - CLOUD_SERVER_URL=${CLOUD_SERVER_URL}
+    restart: always
+
+volumes:
+  nginx_conf: 
