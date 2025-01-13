@@ -394,6 +394,7 @@ app.listen(port, () => {
 - 解决 云服务器 cloud-server 上部署问题
 - 搭建阿里云镜像仓库
 - dynamic-server 服务器 docker 安装问题
+- dynamic-server 防火墙问题
 ---
 
 
