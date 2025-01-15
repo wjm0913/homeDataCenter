@@ -258,8 +258,6 @@ app.listen(PORT, () => {
     worker_processes  auto;
     
     error_log  /var/log/nginx/error.log warn;
-    # 注意启动路径
-    pid        /var/run/nginx/nginx.pid;
     
     events {
     worker_connections 1024;
