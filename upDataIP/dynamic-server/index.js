@@ -5,7 +5,7 @@ const app = express();
 const port = 3001;
 
 // 云服务器的地址
-const CLOUD_SERVER_URL = 'http://8.155.39.35:3000/update-ip';
+const CLOUD_SERVER_URL = 'https://xxxxxxxxxxx.cn/abc/update-ip';
 
 // 添加测试接口
 app.get('/test', (req, res) => {
