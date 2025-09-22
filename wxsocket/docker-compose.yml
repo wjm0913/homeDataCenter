@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  msg-relay:
+    build: .
+    container_name: msg-relay
+    restart: always
+    ports:
+      - "8826:8826"
+    environment:
+      - PORT=8826
+      - CALLBACK_PATH=/callback
+      - WS_PATH=/ws
