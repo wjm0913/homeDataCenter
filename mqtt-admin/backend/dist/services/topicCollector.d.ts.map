@@ -1,0 +1,1 @@
+{"version":3,"file":"topicCollector.d.ts","sourceRoot":"","sources":["../../src/services/topicCollector.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,SAAS;IACxB,KAAK,EAAE,MAAM,CAAC;IACd,GAAG,EAAE,MAAM,CAAC;IACZ,QAAQ,CAAC,EAAE,SAAS,EAAE,CAAC;CACxB;AAED,qBAAa,cAAc;IACzB,OAAO,CAAC,MAAM,CAA0B;IAExC,GAAG,CAAC,KAAK,EAAE,MAAM;IAKjB,IAAI,IAAI,MAAM,EAAE;IAIhB,IAAI,IAAI,SAAS,EAAE;CA0BpB"}

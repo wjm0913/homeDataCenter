@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  mqtt-web-ui:
+    build: .
+    container_name: mqtt-web-ui
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    networks:
+      - mqtt-network
+
+networks:
+  mqtt-network:
+    driver: bridge

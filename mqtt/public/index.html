@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MQTT Web UI 管理界面</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- 头部 -->
+    <header>
+      <h1>🌐 MQTT Web UI 管理界面</h1>
+      <div class="connection-status">
+        <span class="status-indicator" id="statusIndicator"></span>
+        <span id="statusText">未连接</span>
+      </div>
+    </header>
+
+    <!-- 连接配置 -->
+    <section class="connection-panel">
+      <h2>📡 MQTT 连接配置</h2>
+      <div class="form-group">
+        <div class="input-row">
+          <div class="input-group">
+            <label>服务器地址:</label>
+            <input type="text" id="mqttHost" value="27.191.2.71" placeholder="MQTT 服务器地址">
+          </div>
+          <div class="input-group">
+            <label>端口:</label>
+            <input type="number" id="mqttPort" value="5502" placeholder="端口">
+          </div>
+        </div>
+        <div class="input-row">
+          <div class="input-group">
+            <label>用户名:</label>
+            <input type="text" id="mqttUsername" value="admin" placeholder="用户名">
+          </div>
+          <div class="input-group">
+            <label>密码:</label>
+            <input type="password" id="mqttPassword" value="wjm234.CN" placeholder="密码">
+          </div>
+        </div>
+        <div class="button-group">
+          <button id="connectBtn" class="btn btn-primary">🔌 连接</button>
+          <button id="disconnectBtn" class="btn btn-danger" disabled>🔌 断开</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="main-content">
+      <!-- 订阅管理 -->
+      <section class="subscribe-panel">
+        <h2>📨 主题订阅</h2>
+        <div class="form-group">
+          <div class="input-group">
+            <input type="text" id="subscribeTopic" placeholder="输入主题 (例如: test, home/#)" value="test">
+            <button id="subscribeBtn" class="btn btn-success" disabled>订阅</button>
+          </div>
+        </div>
+        <div class="subscribed-topics">
+          <h3>已订阅的主题:</h3>
+          <ul id="subscribedList"></ul>
+        </div>
+      </section>
+
+      <!-- 消息发布 -->
+      <section class="publish-panel">
+        <h2>📤 消息发布</h2>
+        <div class="form-group">
+          <div class="input-group">
+            <label>主题:</label>
+            <input type="text" id="publishTopic" placeholder="主题 (例如: test)" value="test">
+          </div>
+          <div class="input-group">
+            <label>消息内容:</label>
+            <textarea id="publishPayload" rows="4" placeholder="输入要发布的消息内容"></textarea>
+          </div>
+          <div class="input-row">
+            <div class="input-group">
+              <label>QoS:</label>
+              <select id="publishQos">
+                <option value="0">0 - 至多一次</option>
+                <option value="1">1 - 至少一次</option>
+                <option value="2">2 - 恰好一次</option>
+              </select>
+            </div>
+            <div class="input-group checkbox-group">
+              <label>
+                <input type="checkbox" id="publishRetain">
+                Retain (保留消息)
+              </label>
+            </div>
+          </div>
+          <button id="publishBtn" class="btn btn-primary" disabled>📤 发布消息</button>
+        </div>
+      </section>
+    </div>
+
+    <!-- 消息监控 -->
+    <section class="messages-panel">
+      <h2>📬 消息监控</h2>
+      <div class="messages-controls">
+        <button id="clearMessagesBtn" class="btn btn-secondary">🗑️ 清空消息</button>
+        <label class="checkbox-group">
+          <input type="checkbox" id="autoScroll" checked>
+          自动滚动
+        </label>
+      </div>
+      <div class="messages-container" id="messagesContainer">
+        <div class="empty-state">暂无消息，等待接收...</div>
+      </div>
+    </section>
+
+    <!-- 日志 -->
+    <section class="log-panel">
+      <h2>📋 系统日志</h2>
+      <div class="log-controls">
+        <button id="clearLogBtn" class="btn btn-secondary">🗑️ 清空日志</button>
+      </div>
+      <div class="log-container" id="logContainer">
+        <div class="log-item info">等待连接到 MQTT 服务器...</div>
+      </div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

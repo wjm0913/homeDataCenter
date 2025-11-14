@@ -166,7 +166,62 @@ app.post('/gewe/v2/api/group/getChatroomMemberList', async (req, res) => {
 });
 
 
-
+app.post('/voice/xsend', async (req, res) => {
+  try {
+    // 1. 验证 token
+    const token = req.headers['token'];
+    if (!isValidTokenString(token)) {
+      return res.status(401).json({
+        ret: 401,
+        msg: '未授权，无效的 token',
+        data: null
+      });
+    }
+    // 2. 验证请求体参数
+    const { toPhone } = req.body;
+    if (!toPhone) {
+      return res.status(400).json({
+        ret: 400,
+        msg: '请求参数不完整，需要 toPhone',
+        data: null
+      });
+    }
+    
+    // 3. 构建转发到实际 API 的请求
+    try {
+      // 这里可以直接转发到实际的消息发送 API
+      // 示例：直接使用 axios 转发到实际的 API 服务
+      const response = await axios.post('https://api-v4.mysubmail.com/voice/xsend', {
+        "signature": "6ad121509949de59db5e2954d70f793b",
+        to: toPhone,
+        "project": "QtDGT3",
+        "appid": "22783",
+        "vars": "{}",
+      });
+      
+      // 5. 返回成功响应
+      return res.status(200).json({
+        ret: 200,
+        msg: '操作成功',
+        data: response.data
+      });
+    } catch (error) {
+      console.error('转发消息失败:', error);
+      return res.status(500).json({
+        ret: 500,
+        msg: '发送消息失败: ' + (error.message || '未知错误'),
+        data: null
+      });
+    }
+  } catch (e) {
+    console.error('处理请求异常:', e);
+    return res.status(500).json({
+      ret: 500,
+      msg: '服务器内部错误',
+      data: null
+    });
+  }
+});
 
 
 

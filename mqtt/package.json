@@ -1,0 +1,23 @@
+{
+  "name": "mqtt-web-ui",
+  "version": "1.0.0",
+  "description": "Eclipse Mosquitto MQTT Web UI 管理界面",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "mqtt",
+    "mosquitto",
+    "web-ui",
+    "管理界面"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.2",
+    "mqtt": "^5.14.1",
+    "ws": "^8.18.3"
+  }
+}

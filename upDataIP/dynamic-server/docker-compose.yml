@@ -1,0 +1,30 @@
+# docker-compose.yml
+# 使用 Docker Compose v2（推荐通过 `docker compose` 命令运行）
+services:
+  dynamic-server:
+    container_name: dynamic-server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: dynamic-server:v2          # 本地构建后打这个标签，可改版本号
+    ports:
+      - "3001:3001"                   # 映射端口：宿主机:容器
+    environment:
+      - NODE_ENV=production
+      - PORT=3001                     # 如果你的应用读取 PORT，就保持一致
+    restart: unless-stopped           # 开机自启&异常自动重启
+    # 如果你的应用提供健康检查接口，强烈建议启用：
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3001/test"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    # 可选：限制日志大小，防止日志占满磁盘
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    # 可选：挂载源码或数据（如果需要持久化/开发热更再加）
+    # volumes:
+    #   - ./data:/app/data
